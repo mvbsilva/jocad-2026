@@ -47,3 +47,7 @@ Portal estático do IFPA Campus Bragança para consulta pública de jogos, placa
 - O projeto depende do Supabase para persistência; o ZIP não contém banco de dados nem credenciais de acesso.
 
 Leia [Instalação](docs/INSTALACAO.md), [Arquitetura](docs/ARQUITETURA.md) e [Operação](docs/OPERACAO.md).
+
+## Limpeza dos dados de teste
+
+Scripts manuais com confirmação em [database/reset/](database/reset/README.md). Faça backup antes de usar.
