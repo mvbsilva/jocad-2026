@@ -25,14 +25,17 @@ window.openAdmin=()=>{if(!ready){alert('Configure o Supabase para habilitar a se
 window.toggleMedalEditor=()=>{if(!ready){alert('Configure o Supabase.');return}if(!authorized()){showLogin();return}document.getElementById('medalEditor').classList.toggle('show')};
 window.saveGame=async()=>{
  if(!authorized())return showLogin();
- const id=document.getElementById('editGame').value,scoreA=document.getElementById('scoreA').value,scoreB=document.getElementById('scoreB').value,gameStatus=document.getElementById('editStatus').value;
- if((scoreA==='')!==(scoreB===''))return alert('Informe os dois placares ou deixe ambos vazios.');
- if(gameStatus==='Finalizado'&&(scoreA===''||scoreB===''))return alert('Informe o placar antes de finalizar.');
- if([scoreA,scoreB].some(x=>x!==''&&(!/^\d+$/.test(x)||Number(x)>999)))return alert('Informe placares inteiros de 0 a 999.');
- const {error}=await client.from('matches').update({score_a:scoreA===''?null:Number(scoreA),score_b:scoreB===''?null:Number(scoreB),status:gameStatus}).eq('id',id);
+ const id=document.getElementById('editGame').value;
+ const g=games.find(x=>String(x.id)===String(id));if(!g)return alert('Selecione um confronto.');
+ let result;
+ try{result=window.JOCAD_SUMULAS.collect(g)}catch(e){return alert(e.message)}
+ const gameStatus=document.getElementById('editStatus').value;
+ if(gameStatus==='Finalizado'&&!result.complete)return alert('A súmula não permite finalizar: '+result.reason);
+ const {error}=await client.from('matches').update({score_a:result.a,score_b:result.b,status:gameStatus,result_details:result.details,winner_side:gameStatus==='Finalizado'?result.winner:null}).eq('id',id);
  if(error)return alert('Não foi possível salvar: '+error.message);
  originalClose();await refresh();
 };
+
 window.saveNews=async()=>{
  if(!authorized())return showLogin();
  const title=document.getElementById('newsTitle').value.trim(),body=document.getElementById('newsBody').value.trim();
@@ -55,13 +58,13 @@ window.exportJocadBackup=()=>alert('Para backup oficial, utilize os recursos de 
 async function refresh(){
  if(!ready)return;
  const [gm,bl,md]=await Promise.all([
-  client.from('matches').select('id,num,day,home,away,sport,gender,score_a,score_b,status').order('num'),
+  client.from('matches').select('id,num,day,home,away,sport,gender,score_a,score_b,status,result_details,winner_side').order('num'),
   client.from('bulletins').select('id,title,body,published_at').order('published_at',{ascending:false}).limit(100),
   client.from('medals').select('course,gold,silver')
  ]);
  if(gm.error||bl.error||md.error){report('Falha na consulta online. Exibindo programação inicial local, sem resultados oficiais sincronizados.');return}
  if(!gm.data.length || !md.data.length){report('Banco ainda sem carga inicial: exibindo os 36 jogos e os 9 cursos da programação local. Execute supabase_schema.sql no projeto antes da publicação.');return}
- games=gm.data.map(x=>({id:x.id,num:String(x.num).padStart(2,'0'),day:String(x.day),home:x.home,away:x.away,sport:x.sport,gender:x.gender,scoreA:x.score_a===null?'':String(x.score_a),scoreB:x.score_b===null?'':String(x.score_b),status:x.status}));
+ games=gm.data.map(x=>({id:x.id,num:String(x.num).padStart(2,'0'),day:String(x.day),home:x.home,away:x.away,sport:x.sport,gender:x.gender,scoreA:x.score_a===null?'':String(x.score_a),scoreB:x.score_b===null?'':String(x.score_b),status:x.status,details:x.result_details||{},winnerSide:x.winner_side||null}));
  news=bl.data.map(x=>({title:x.title,body:x.body,date:new Date(x.published_at).toLocaleDateString('pt-BR')}));
  medalData=Object.fromEntries(md.data.map(x=>[x.course,{gold:x.gold,silver:x.silver}]));
  render();renderNews();renderMedals();
