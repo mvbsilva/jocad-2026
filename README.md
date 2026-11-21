@@ -59,3 +59,15 @@ Avanço automático dos vencedores conforme as referências dos confrontos, exib
 ### Créditos do portal
 
 Rodapé: **Elaboração e propriedade do site: Informática - IFPA Bragança**.
+
+
+## Atualização V21 — interface e programação
+
+- Removida a nota sobre renumeração e horários dos confrontos.
+- Removido da página pública o botão “Gerenciar medalhas · Secretaria”; a gestão permanece na Central da Secretaria.
+- Placar na lista de confrontos utiliza `×` no lugar de `:`.
+- Fontes padronizadas nos elementos `select`, `option` e `optgroup`. A renderização do menu aberto pode variar conforme o navegador/sistema operacional.
+- Almoço (11h às 13h) e lanche (18h às 19h) incluídos nos quatro dias, sem atribuir local não informado.
+- Retiradas as etiquetas genéricas “Confronto” e “Eliminatória” da listagem, pois eram inferidas heurísticamente, não registradas como fase oficial.
+
+Não há migração SQL nesta atualização. Preserve o `config.js` de implantação.
