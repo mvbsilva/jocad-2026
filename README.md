@@ -55,3 +55,7 @@ Scripts manuais com confirmação em [database/reset/](database/reset/README.md)
 ## Atualização V19
 
 Avanço automático dos vencedores conforme as referências dos confrontos, exibição da origem, Educação do Campo e nova marca JOCAD. Veja [chaveamento](docs/CHAVEAMENTO.md) e execute a migração SQL do curso.
+
+### Créditos do portal
+
+Rodapé: **Elaboração e propriedade do site: Informática - IFPA Bragança**.
