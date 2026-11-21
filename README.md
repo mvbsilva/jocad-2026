@@ -71,3 +71,8 @@ Rodapé: **Elaboração e propriedade do site: Informática - IFPA Bragança**.
 - Retiradas as etiquetas genéricas “Confronto” e “Eliminatória” da listagem, pois eram inferidas heurísticamente, não registradas como fase oficial.
 
 Não há migração SQL nesta atualização. Preserve o `config.js` de implantação.
+
+
+## Ajuste da programação (V22)
+
+A programação é ordenada cronologicamente pelo horário de início, preservando a ordem original em caso de empate. Almoço (11h às 13h) e lanche (18h às 19h) têm local Restaurante em todos os quatro dias. Nenhum outro evento foi alterado.
