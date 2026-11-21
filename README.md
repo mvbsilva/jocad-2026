@@ -51,3 +51,7 @@ Leia [Instalação](docs/INSTALACAO.md), [Arquitetura](docs/ARQUITETURA.md) e [O
 ## Limpeza dos dados de teste
 
 Scripts manuais com confirmação em [database/reset/](database/reset/README.md). Faça backup antes de usar.
+
+## Atualização V19
+
+Avanço automático dos vencedores conforme as referências dos confrontos, exibição da origem, Educação do Campo e nova marca JOCAD. Veja [chaveamento](docs/CHAVEAMENTO.md) e execute a migração SQL do curso.

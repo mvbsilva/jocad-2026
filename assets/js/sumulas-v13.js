@@ -7,7 +7,7 @@ const kind=g=>{const s=(g.sport||'').toLowerCase();return s.includes('vôlei')||
 const isFinal=g=>Number(g.day)===27 || /final/i.test(String(g.phase||g.round||g.stage||''));
 const number=(value)=>value===''||value===null||value===undefined?null:Number(value);
 function fields(g){
- const k=kind(g),d=g.result_details||{},a=g.home,b=g.away;
+ const k=kind(g),d=g.result_details||{},a=jocadTeamName(g,'home'),b=jocadTeamName(g,'away');
  $('jocadScoreLegacy').hidden=k!=='basic';$('jocadRules').hidden=k==='basic';$('jocadRules').dataset.kind=k;
  if(k==='basic'){$('jocadRules').innerHTML='';return;}
  const final=isFinal(g),count=k==='volley'?(final?5:3):k==='dodge'?1:2;
