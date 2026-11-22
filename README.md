@@ -1,57 +1,49 @@
-# JOCAD 2026 — IFPA Campus Bragança
+# JOCAD 2026 — Portal do IFPA Campus Bragança
 
-Portal público de jogos, resultados, programação, boletins e medalhas, com Central da Secretaria autenticada no Supabase.
+Portal público e Central da Secretaria para jogos, placares, súmulas, programação, boletins e premiações. **Versão organizada: V34 (base funcional V33).**
 
-## Estrutura
+## Organização
 
-- `index.html` — interface e lógica de apresentação (HTML/CSS/JavaScript)
-- `assets/js/bootstrap.js` — integração inicial e súmulas
-- `assets/js/portal.js` — sincronização pública, Secretaria, boletins e usuários
-- `assets/images/` — imagens institucionais
-- `config.example.js` — exemplo de configuração do Supabase
-- `database/migrations/` — seis migrações incrementais, numeradas por ordem de aplicação
-- `database/reset/` — **scripts destrutivos**, somente para operação manual controlada
-- `data/` — CSVs de referência
-- `docs/` — instalação, operação, arquitetura e histórico
+```text
+jocad-2026/
+├── index.html                  # Página pública e Secretaria; scripts de interface legados mantidos
+├── assets/
+│   ├── css/site.css           # Estilos consolidados da página
+│   ├── images/                # Logomarcas oficiais, sem alterações
+│   └── js/                    # Bootstrap, portal e premiações
+├── config.example.js          # Modelo de configuração pública
+├── data/                      # CSVs de referência
+├── database/
+│   ├── migrations/            # Migrações incrementais 0001–0008
+│   └── reset/                 # Scripts DESTRUTIVOS; não executar em deploy
+├── docs/                      # Instalação, operação, arquitetura, versões e histórico
+├── scripts/check_repo.py      # Verificações locais de integridade
+├── .gitignore
+└── .nojekyll
+```
 
-## Publicação no GitHub Pages
+## Publicar no GitHub Pages
 
-1. Publique o conteúdo **desta pasta** na raiz da branch escolhida para o GitHub Pages.
-2. Preserve o seu `config.js` existente ou crie-o a partir de `config.example.js` com a URL e chave **anon/publishable** do Supabase. O arquivo é ignorado pelo Git por padrão; garanta que esteja disponível na publicação por um método seguro de deploy. **Nunca use `service_role` no navegador.**
-3. No GitHub, configure **Settings → Pages → Deploy from a branch**.
-4. Para testar localmente, execute `python3 -m http.server 8000` na raiz e abra `http://localhost:8000`.
-5. Teste login, permissões, edição de jogos, súmulas, medalhas, boletins, seleção automática do dia e sincronização silenciosa a cada 30 segundos durante o evento.
+1. Copie **o conteúdo desta pasta** para a raiz da branch publicada (não a pasta-pai).
+2. Preserve sua configuração `config.js` atual. Para uma instalação nova, use `config.example.js` como referência e configure somente URL e chave **anon/publishable** do Supabase. **Nunca use `service_role` no navegador.** O arquivo `config.js` é ignorado pelo Git e precisa ser disponibilizado por um processo de publicação adequado.
+3. Em **Settings → Pages**, configure a publicação da branch e da pasta `/ (root)`.
+4. Antes do commit, execute `python3 scripts/check_repo.py` e, se disponível, `node --check assets/js/bootstrap.js && node --check assets/js/portal.js && node --check assets/js/awards.js`.
+5. Para testar localmente: `python3 -m http.server 8000` e abra `http://localhost:8000`.
 
-## Banco de dados
+## Banco e segurança
 
-**Este pacote não inclui o esquema inicial do banco Supabase.** As migrações são incrementais e pressupõem a estrutura já existente (`matches`, `medals`, `bulletins`, `staff_roles`, `audit_log`, autenticação e funções RLS).
+As migrações em `database/migrations/` **dependem de um esquema inicial já existente**, que não integra esta entrega. Não aplique migrações automaticamente nem repita scripts em produção sem conferir o histórico do banco. Os scripts em `database/reset/` apagam dados e não são usados na implantação. A autenticação e autorização efetivas dependem das políticas RLS do Supabase.
 
-- **Banco existente:** não reaplique automaticamente migrações já executadas. Renomear os arquivos não cria uma nova necessidade de execução.
-- **Banco novo:** primeiro é necessário provisionar o esquema inicial; depois aplicar `0001` a `0006`, na ordem, verificando pré-requisitos.
-- Os arquivos de `database/reset/` **não são migrações** e podem apagar dados.
+## Mudanças da V34
 
-Consulte `docs/INSTALACAO.md` e `database/migrations/README.md`.
+- Estilos CSS do cabeçalho do documento extraídos para `assets/css/site.css`, mantendo a ordem original das regras.
+- Documentação principal e estrutura do projeto revisadas, incluindo as migrações 0007 e 0008.
+- Adicionado verificador de integridade para caminhos locais e arquivos obrigatórios.
+- Arquivo legado de usuários V24 não referenciado movido para `docs/historico/`, se aplicável.
+- Mantidos os ajustes V30–V33: cabeçalho com **2026 em `#043e77`**, cards responsivos e selects da Secretaria.
 
-## Segurança e operação
+**Importante:** não foi realizada validação ponta a ponta contra o Supabase de produção. Verifique o fluxo de login, resultados, premiações e boletins em ambiente de teste antes da publicação definitiva.
 
-O controle de acesso efetivo depende das políticas RLS e funções do Supabase. A interface administrativa não substitui as regras de autorização no banco. Não inclua senhas ou chaves privadas no repositório.
+Consulte `docs/INSTALACAO.md`, `docs/OPERACAO.md`, `docs/ARQUITETURA.md` e `docs/EVOLUCAO.md`.
 
-**Créditos:** Desenvolvimento: Prof. Dr. Marcus Vinicius Brito · Informática - IFPA Campus Bragança.
-
-
-### Ajuste visual dos confrontos
-Corrigido o grid desktop dos cards de jogos: eram quatro colunas CSS para três blocos HTML, causando uma coluna vazia à direita. Agora são três colunas (informações, equipes/placar e ações), com responsividade preservada. Sem migração SQL.
-
-
-## V28 — Registro de conquistas
-
-A V28 acrescenta medalhas esportivas e culturais com justificativa, histórico de alterações, filtro público e gerenciamento na Secretaria. Execute `database/migrations/0007-registro-de-conquistas.sql` antes de publicar. Consulte `docs/CONQUISTAS_V28.md`.
-
-
-## V30 — Cabeçalho institucional
-
-Novo cabeçalho responsivo aprovado: logos oficiais nas extremidades, JOCAD em verde e 2026 em azul, tema e data centralizados. Não requer SQL adicional. Consulte `docs/CABECALHO_V30.md`.
-
-
-## Atualização V31 — cards responsivos
-Layout mais compacto dos confrontos em celulares. Consulte `docs/CARDS_RESPONSIVOS_V31.md`.
+**Créditos:** Desenvolvimento: Prof. Dr. Marcus Vinicius Brito · Informática — IFPA Campus Bragança.

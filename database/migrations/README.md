@@ -12,3 +12,7 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 **Atenção:** não há schema inicial nesta entrega. Não execute estas migrações indiscriminadamente sobre um banco em produção. Confirme quais já foram aplicadas; a renumeração é apenas organização do repositório. Faça backup e use o SQL Editor com privilégios adequados.
 
 7. `0007-registro-de-conquistas.sql` — premiações esportivas/culturais e contagem automática.
+
+8. `0008-corrigir-recalculo-medalhas.sql` — correção do recálculo de medalhas (V29).
+
+**V34:** a reorganização de arquivos não cria migrações novas. Para um banco já atualizado até a V33, não é necessário executar SQL.
