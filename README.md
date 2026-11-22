@@ -76,3 +76,7 @@ Não há migração SQL nesta atualização. Preserve o `config.js` de implanta�
 ## Ajuste da programação (V22)
 
 A programação é ordenada cronologicamente pelo horário de início, preservando a ordem original em caso de empate. Almoço (11h às 13h) e lanche (18h às 19h) têm local Restaurante em todos os quatro dias. Nenhum outro evento foi alterado.
+
+## V24 — Usuários e permissões
+
+Consulte [docs/USUARIOS_E_PERMISSOES.md](docs/USUARIOS_E_PERMISSOES.md) e execute `database/migrations/20261122_usuarios_v24.sql`.
