@@ -51,3 +51,7 @@ A V28 acrescenta medalhas esportivas e culturais com justificativa, histórico d
 ## V30 — Cabeçalho institucional
 
 Novo cabeçalho responsivo aprovado: logos oficiais nas extremidades, JOCAD em verde e 2026 em azul, tema e data centralizados. Não requer SQL adicional. Consulte `docs/CABECALHO_V30.md`.
+
+
+## Atualização V31 — cards responsivos
+Layout mais compacto dos confrontos em celulares. Consulte `docs/CARDS_RESPONSIVOS_V31.md`.
