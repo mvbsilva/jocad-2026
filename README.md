@@ -46,3 +46,8 @@ Corrigido o grid desktop dos cards de jogos: eram quatro colunas CSS para três 
 ## V28 — Registro de conquistas
 
 A V28 acrescenta medalhas esportivas e culturais com justificativa, histórico de alterações, filtro público e gerenciamento na Secretaria. Execute `database/migrations/0007-registro-de-conquistas.sql` antes de publicar. Consulte `docs/CONQUISTAS_V28.md`.
+
+
+## V30 — Cabeçalho institucional
+
+Novo cabeçalho responsivo aprovado: logos oficiais nas extremidades, JOCAD em verde e 2026 em azul, tema e data centralizados. Não requer SQL adicional. Consulte `docs/CABECALHO_V30.md`.
