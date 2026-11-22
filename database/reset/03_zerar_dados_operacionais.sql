@@ -11,5 +11,7 @@ UPDATE public.matches SET score_a=NULL, score_b=NULL,
  result_details='{}'::jsonb, winner_side=NULL,
  status='Programado', updated_at=now(), updated_by=NULL;
 DELETE FROM public.bulletins;
+-- V28: remove registros individuais antes de zerar o quadro.
+DELETE FROM public.medal_awards;
 UPDATE public.medals SET gold=0, silver=0, updated_at=now(), updated_by=NULL;
 COMMIT;

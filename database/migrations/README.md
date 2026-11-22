@@ -10,3 +10,5 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 0006. `0006-nomes-e-emails-de-usuarios.sql` — origem: `20261122_usuarios_v25_nome_email.sql`
 
 **Atenção:** não há schema inicial nesta entrega. Não execute estas migrações indiscriminadamente sobre um banco em produção. Confirme quais já foram aplicadas; a renumeração é apenas organização do repositório. Faça backup e use o SQL Editor com privilégios adequados.
+
+7. `0007-registro-de-conquistas.sql` — premiações esportivas/culturais e contagem automática.

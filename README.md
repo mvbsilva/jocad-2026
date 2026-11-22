@@ -41,3 +41,8 @@ O controle de acesso efetivo depende das políticas RLS e funções do Supabase.
 
 ### Ajuste visual dos confrontos
 Corrigido o grid desktop dos cards de jogos: eram quatro colunas CSS para três blocos HTML, causando uma coluna vazia à direita. Agora são três colunas (informações, equipes/placar e ações), com responsividade preservada. Sem migração SQL.
+
+
+## V28 — Registro de conquistas
+
+A V28 acrescenta medalhas esportivas e culturais com justificativa, histórico de alterações, filtro público e gerenciamento na Secretaria. Execute `database/migrations/0007-registro-de-conquistas.sql` antes de publicar. Consulte `docs/CONQUISTAS_V28.md`.
