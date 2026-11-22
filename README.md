@@ -1,82 +1,39 @@
-# JOCAD 2026 — Portal oficial de acompanhamento
+# JOCAD 2026 — IFPA Campus Bragança
 
-Portal estático do IFPA Campus Bragança para consulta pública de jogos, placares, súmulas por modalidade, boletins e medalhas. Secretaria com autenticação Supabase, atualização de resultados e gestão de boletins. Base de código consolidada da **V18**.
+Portal público de jogos, resultados, programação, boletins e medalhas, com Central da Secretaria autenticada no Supabase.
 
 ## Estrutura
 
-```text
-.
-├── index.html                 # Página pública e interface da Secretaria
-├── config.example.js         # Modelo de configuração pública
-├── assets/
-│   ├── images/               # Logotipo institucional
-│   └── js/                   # Integração e lógica da Secretaria
-├── data/                      # CSVs de referência (não substituem o banco)
-├── database/migrations/       # Migrações históricas do Supabase
-├── docs/
-│   ├── INSTALACAO.md
-│   ├── ARQUITETURA.md
-│   ├── OPERACAO.md
-│   └── historico/             # Notas de versões V11–V18
-├── .gitignore
-└── .nojekyll
-```
+- `index.html` — interface e lógica de apresentação (HTML/CSS/JavaScript)
+- `assets/js/bootstrap.js` — integração inicial e súmulas
+- `assets/js/portal.js` — sincronização pública, Secretaria, boletins e usuários
+- `assets/images/` — imagens institucionais
+- `config.example.js` — exemplo de configuração do Supabase
+- `database/migrations/` — seis migrações incrementais, numeradas por ordem de aplicação
+- `database/reset/` — **scripts destrutivos**, somente para operação manual controlada
+- `data/` — CSVs de referência
+- `docs/` — instalação, operação, arquitetura e histórico
 
-## Implantação rápida
+## Publicação no GitHub Pages
 
-1. Copie `config.example.js` para `config.js` e informe **URL** e chave **publishable/anon** do Supabase. Nunca use chave secreta/service_role.
-2. Para desenvolvimento local, sirva a pasta via `python3 -m http.server 8000` e abra `http://localhost:8000`.
-3. No GitHub, publique a **raiz da branch `main`** em **Settings → Pages → Deploy from a branch**. O `config.js` precisa existir no conteúdo publicado (veja `docs/INSTALACAO.md`).
-4. No Supabase, confirme RLS, permissões, triggers e migrações já aplicadas. **Não reaplique indiscriminadamente migrações antigas em um banco com dados.**
-5. Valide login, placar parcial, voleibol, futsal com pênaltis, medalhas, publicação/edição/exclusão de boletins e fixação de até 3 jogos.
+1. Publique o conteúdo **desta pasta** na raiz da branch escolhida para o GitHub Pages.
+2. Preserve o seu `config.js` existente ou crie-o a partir de `config.example.js` com a URL e chave **anon/publishable** do Supabase. O arquivo é ignorado pelo Git por padrão; garanta que esteja disponível na publicação por um método seguro de deploy. **Nunca use `service_role` no navegador.**
+3. No GitHub, configure **Settings → Pages → Deploy from a branch**.
+4. Para testar localmente, execute `python3 -m http.server 8000` na raiz e abra `http://localhost:8000`.
+5. Teste login, permissões, edição de jogos, súmulas, medalhas, boletins, seleção automática do dia e sincronização silenciosa a cada 30 segundos durante o evento.
 
-## Funcionalidades
+## Banco de dados
 
-- 36 confrontos cadastrados; seleção por dia, modalidade e categoria.
-- Súmulas digitais com detalhes de sets/tempos, parciais e desempates.
-- Até 3 jogos fixados por visitante no navegador.
-- Boletins públicos e gerenciamento na Secretaria.
-- Quadro de medalhas por curso/segmento.
-- Autenticação por usuário e políticas RLS no Supabase.
+**Este pacote não inclui o esquema inicial do banco Supabase.** As migrações são incrementais e pressupõem a estrutura já existente (`matches`, `medals`, `bulletins`, `staff_roles`, `audit_log`, autenticação e funções RLS).
 
-## Observações
+- **Banco existente:** não reaplique automaticamente migrações já executadas. Renomear os arquivos não cria uma nova necessidade de execução.
+- **Banco novo:** primeiro é necessário provisionar o esquema inicial; depois aplicar `0001` a `0006`, na ordem, verificando pré-requisitos.
+- Os arquivos de `database/reset/` **não são migrações** e podem apagar dados.
 
-- O `index.html` contém CSS e lógica de apresentação embutidos. **Esta entrega organiza o repositório sem reescrever essa parte**, para minimizar regressões na versão validada pelo usuário.
-- Os nomes `sumulas-v13.js`, `secretaria-v16.js` etc. foram mantidos por compatibilidade; são componentes ativos da V18, não versões independentes.
-- A V18 infere finais de voleibol pelo dia 27 ou indicação textual de fase; confirme os confrontos antes do evento.
-- O projeto depende do Supabase para persistência; o ZIP não contém banco de dados nem credenciais de acesso.
+Consulte `docs/INSTALACAO.md` e `database/migrations/README.md`.
 
-Leia [Instalação](docs/INSTALACAO.md), [Arquitetura](docs/ARQUITETURA.md) e [Operação](docs/OPERACAO.md).
+## Segurança e operação
 
-## Limpeza dos dados de teste
+O controle de acesso efetivo depende das políticas RLS e funções do Supabase. A interface administrativa não substitui as regras de autorização no banco. Não inclua senhas ou chaves privadas no repositório.
 
-Scripts manuais com confirmação em [database/reset/](database/reset/README.md). Faça backup antes de usar.
-
-## Atualização V19
-
-Avanço automático dos vencedores conforme as referências dos confrontos, exibição da origem, Educação do Campo e nova marca JOCAD. Veja [chaveamento](docs/CHAVEAMENTO.md) e execute a migração SQL do curso.
-
-### Créditos do portal
-
-Rodapé: **Elaboração e propriedade do site: Informática - IFPA Bragança**.
-
-
-## Atualização V21 — interface e programação
-
-- Removida a nota sobre renumeração e horários dos confrontos.
-- Removido da página pública o botão “Gerenciar medalhas · Secretaria”; a gestão permanece na Central da Secretaria.
-- Placar na lista de confrontos utiliza `×` no lugar de `:`.
-- Fontes padronizadas nos elementos `select`, `option` e `optgroup`. A renderização do menu aberto pode variar conforme o navegador/sistema operacional.
-- Almoço (11h às 13h) e lanche (18h às 19h) incluídos nos quatro dias, sem atribuir local não informado.
-- Retiradas as etiquetas genéricas “Confronto” e “Eliminatória” da listagem, pois eram inferidas heurísticamente, não registradas como fase oficial.
-
-Não há migração SQL nesta atualização. Preserve o `config.js` de implantação.
-
-
-## Ajuste da programação (V22)
-
-A programação é ordenada cronologicamente pelo horário de início, preservando a ordem original em caso de empate. Almoço (11h às 13h) e lanche (18h às 19h) têm local Restaurante em todos os quatro dias. Nenhum outro evento foi alterado.
-
-## V24 — Usuários e permissões
-
-Consulte [docs/USUARIOS_E_PERMISSOES.md](docs/USUARIOS_E_PERMISSOES.md) e execute `database/migrations/20261122_usuarios_v24.sql`.
+**Créditos:** Desenvolvimento: Prof. Dr. Marcus Vinicius Brito · Informática - IFPA Campus Bragança.

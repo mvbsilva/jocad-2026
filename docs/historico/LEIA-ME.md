@@ -1,0 +1,1 @@
+Documentos históricos preservados para consulta. Referências a nomes antigos de migrações correspondem aos arquivos renumerados em `database/migrations/`. Para instruções atuais consulte `docs/INSTALACAO.md`.

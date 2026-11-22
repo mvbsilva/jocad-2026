@@ -146,8 +146,7 @@ async function importJocadBackup(event){
 <div id="sessionBar"><span id="sessionName"></span><button id="logoutBtn">Sair</button></div>
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="assets/js/admin-online.js"></script>
-<script src="assets/js/sumulas-v13.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 <script>
 (function(){
 function stats(){if(typeof games==='undefined')return;const total=games.length,done=games.filter(g=>g.status==='Finalizado').length;document.getElementById('secTotal').textContent=total;document.getElementById('secFinished').textContent=done;document.getElementById('secPending').textContent=total-done;}
@@ -157,4 +156,4 @@ const oldOpen=window.openAdmin;window.openAdmin=function(){oldOpen();tab('result
 const oldToggle=window.toggleMedalEditor;window.toggleMedalEditor=function(){window.openAdmin();tab('medalhas')};
 const oldRender=window.render;window.render=function(){oldRender();stats()};
 })();
-</script><script src="assets/js/public-online-v17.js"></script><script src="assets/js/secretaria-v14.js"></script><script src="assets/js/secretaria-v16.js"></script><script src="assets/js/usuarios-v25.js"></script></body></html>
+</script><script src="assets/js/portal.js"></script></body></html>
