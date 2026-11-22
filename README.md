@@ -37,3 +37,7 @@ Consulte `docs/INSTALACAO.md` e `database/migrations/README.md`.
 O controle de acesso efetivo depende das políticas RLS e funções do Supabase. A interface administrativa não substitui as regras de autorização no banco. Não inclua senhas ou chaves privadas no repositório.
 
 **Créditos:** Desenvolvimento: Prof. Dr. Marcus Vinicius Brito · Informática - IFPA Campus Bragança.
+
+
+### Ajuste visual dos confrontos
+Corrigido o grid desktop dos cards de jogos: eram quatro colunas CSS para três blocos HTML, causando uma coluna vazia à direita. Agora são três colunas (informações, equipes/placar e ações), com responsividade preservada. Sem migração SQL.
