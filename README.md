@@ -1,3 +1,5 @@
+> **V35:** Gestão da programação na Secretaria, com CRUD, atualização pública e migração `0009-gestao-programacao.sql`. Veja [instruções](docs/GESTAO_PROGRAMACAO_V35.md).
+
 # JOCAD 2026 — Portal do IFPA Campus Bragança
 
 Portal público e Central da Secretaria para jogos, placares, súmulas, programação, boletins e premiações. **Versão organizada: V34 (base funcional V33).**
