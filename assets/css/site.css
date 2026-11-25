@@ -174,3 +174,12 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
 
 /* V37: destaques automáticos, sem alterar cards da lista */
 #liveSection[hidden],#latestSection[hidden]{display:none!important}.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#dc2626;vertical-align:middle;margin-right:5px;animation:jocad-live 2s infinite}@keyframes jocad-live{50%{opacity:.4}}@media(prefers-reduced-motion:reduce){.live-dot{animation:none}}
+
+/* V38: identificação visual da vitória, sem alterar a grade dos cards. */
+#matches .competitor.winner {flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;}
+#matches .competitor.right.winner {align-items:flex-end;}
+.winner-tag {display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:100%;box-sizing:border-box;background:#e8f3eb;color:#145c38;border-radius:5px;padding:3px 5px;font-size:9px;font-weight:800;line-height:1.2;letter-spacing:0;white-space:normal;overflow-wrap:anywhere;}
+.winner-tag svg {width:12px;height:12px;flex:none;}
+.pin-team.winner {display:flex;flex-direction:column;align-items:center;gap:3px;color:#145c38;font-weight:800;}
+.scorebox.winning-score,.pin-number.winning-score {background:#145c38;color:#fff;border-color:#145c38;}
+@media(max-width:420px){.winner-tag{font-size:8px;padding:2px 3px;gap:2px}.winner-tag svg{width:10px;height:10px}}

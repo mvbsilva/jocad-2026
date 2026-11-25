@@ -1,4 +1,8 @@
-# V37 — Acompanhamento ao vivo
+# V38 — Identificação visual dos vencedores
+
+Atualização visual da V37. Em produção com migração 0010 já aplicada, substitua apenas `index.html` e `assets/css/site.css` no mesmo commit. Não execute SQL, cargas ou resets. Preserve `config.js`.
+
+## V37 — Histórico
 
 Atualização incremental da V36 em produção. Consulte [instruções de implantação](docs/ACOMPANHAMENTO_V37.md). Execute somente a migração 0010 após backup; preserve config.js e não execute cargas ou resets.
 
