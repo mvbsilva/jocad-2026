@@ -61,3 +61,6 @@ As migrações em `database/migrations/` **dependem de um esquema inicial já ex
 Consulte `docs/INSTALACAO.md`, `docs/OPERACAO.md`, `docs/ARQUITETURA.md` e `docs/EVOLUCAO.md`.
 
 **Créditos:** Desenvolvimento: Prof. Dr. Marcus Vinicius Brito · Informática — IFPA Campus Bragança.
+
+## V40
+Classificação geral por pontos. Consulte [instruções de publicação](docs/CLASSIFICACAO_V40.md).

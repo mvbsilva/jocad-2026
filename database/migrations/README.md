@@ -20,3 +20,5 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 - `0009-gestao-programacao.sql`: tabela de atividades, RLS, auditoria e carga inicial da programação oficial (V35).
 
 - `0010-acompanhamento-ao-vivo.sql`: metadados de finalização e trigger (V37).
+
+- `0011-classificacao-geral.sql`: colocações de 1º a 5º, eixo artístico e medalha opcional (V40).

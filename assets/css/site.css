@@ -198,3 +198,5 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
 .bulletin-controls small{color:var(--muted);font-size:12px}
 .bulletin-controls [hidden]{display:none!important}
 @media(max-width:600px){#news{padding:12px}#news .bulletin-public{padding:11px}}
+/* V40 */
+#medalhas .medal-table-wrap{overflow-x:auto;min-width:0}#medalhas .medal-table th,#medalhas .medal-table td{padding:6px 4px;white-space:nowrap}#medalhas .medal-table td:nth-child(2){white-space:normal}#medalhas .medal-table td:last-child{color:#145c38;font-weight:700}#medalhas .podium-item strong{overflow-wrap:anywhere}#medalhas .award-card p{white-space:pre-wrap;overflow-wrap:anywhere}
