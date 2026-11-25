@@ -171,3 +171,6 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
  #matches .matchup .scorebox{min-width:25px;padding:6px 3px;font-size:14px}
 }
 @media(max-width:390px){#matches .match{grid-template-columns:minmax(0,1fr) 84px}#matches .matchup .team-name{font-size:11px}#matches .matchup{gap:3px}}
+
+/* V37: destaques automáticos, sem alterar cards da lista */
+#liveSection[hidden],#latestSection[hidden]{display:none!important}.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#dc2626;vertical-align:middle;margin-right:5px;animation:jocad-live 2s infinite}@keyframes jocad-live{50%{opacity:.4}}@media(prefers-reduced-motion:reduce){.live-dot{animation:none}}

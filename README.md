@@ -1,3 +1,7 @@
+# V37 — Acompanhamento ao vivo
+
+Atualização incremental da V36 em produção. Consulte [instruções de implantação](docs/ACOMPANHAMENTO_V37.md). Execute somente a migração 0010 após backup; preserve config.js e não execute cargas ou resets.
+
 > **V35:** Gestão da programação na Secretaria, com CRUD, atualização pública e migração `0009-gestao-programacao.sql`. Veja [instruções](docs/GESTAO_PROGRAMACAO_V35.md).
 
 # JOCAD 2026 — Portal do IFPA Campus Bragança

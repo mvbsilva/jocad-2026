@@ -14,7 +14,7 @@ for match in re.finditer(r'(?:src|href)=["\']([^"\']+)["\']',html):
     if not target or target.startswith(('https:','http:','mailto:','#','data:')):continue
     if target=='config.js':continue # fornecido pelo ambiente
     if not (root/target).is_file():errors.append(f'Referência inexistente: {target}')
-if len(list((root/'database/migrations').glob('*.sql')))!=9:errors.append('Esperadas 9 migrações SQL.')
+if len(list((root/'database/migrations').glob('*.sql')))!=10:errors.append('Esperadas 10 migrações SQL.')
 if errors:
     print('FALHA\n'+'\n'.join(errors));sys.exit(1)
-print('OK: arquivos, referências e nove migrações presentes.')
+print('OK: arquivos, referências e dez migrações presentes.')

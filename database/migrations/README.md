@@ -18,3 +18,5 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 **V34:** a reorganização de arquivos não cria migrações novas. Para um banco já atualizado até a V33, não é necessário executar SQL.
 
 - `0009-gestao-programacao.sql`: tabela de atividades, RLS, auditoria e carga inicial da programação oficial (V35).
+
+- `0010-acompanhamento-ao-vivo.sql`: metadados de finalização e trigger (V37).
