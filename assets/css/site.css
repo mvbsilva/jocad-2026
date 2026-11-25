@@ -183,3 +183,18 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
 .pin-team.winner {display:flex;flex-direction:column;align-items:center;gap:3px;color:#145c38;font-weight:800;}
 .scorebox.winning-score,.pin-number.winning-score {background:#145c38;color:#fff;border-color:#145c38;}
 @media(max-width:420px){.winner-tag{font-size:8px;padding:2px 3px;gap:2px}.winner-tag svg{width:10px;height:10px}}
+
+/* V39 — boletins públicos */
+#news .bulletin-day{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin:16px 0 10px;font-weight:600}
+#news .bulletin-day:first-child{margin-top:0}
+#news .bulletin-day::after{content:"";height:1px;background:var(--line);flex:1}
+#news .bulletin-public{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px;min-width:0}
+#news .bulletin-public:last-child{margin-bottom:0}
+#news .bulletin-public h4{margin:5px 0 8px;font-size:16px;color:#145c38;overflow-wrap:anywhere}
+#news .bulletin-public p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.bulletin-controls{display:grid;gap:8px;text-align:center;margin-top:10px}
+.bulletin-controls button{width:100%;padding:12px;border:1px solid #cbded0;border-radius:9px;background:#fff;color:#145c38;font-weight:700;cursor:pointer}
+.bulletin-controls button:focus-visible{outline:2px solid #145c38;outline-offset:2px}
+.bulletin-controls small{color:var(--muted);font-size:12px}
+.bulletin-controls [hidden]{display:none!important}
+@media(max-width:600px){#news{padding:12px}#news .bulletin-public{padding:11px}}

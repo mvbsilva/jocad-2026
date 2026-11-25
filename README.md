@@ -1,3 +1,7 @@
+# V39 — Boletins públicos
+
+Preserva quebras de linha, agrupa por data (America/Belem) e exibe inicialmente os três últimos boletins, com expansão opcional. Atualize `index.html`, `assets/css/site.css` e `assets/js/portal.js` juntos. Nenhuma migração SQL. Preserve `config.js` e os dados de produção.
+
 # V38 — Identificação visual dos vencedores
 
 Atualização visual da V37. Em produção com migração 0010 já aplicada, substitua apenas `index.html` e `assets/css/site.css` no mesmo commit. Não execute SQL, cargas ou resets. Preserve `config.js`.
