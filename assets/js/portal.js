@@ -6,6 +6,7 @@ function competitionDay(){const d=new Date();return d.getFullYear()===2026&&d.ge
 function getClient(){if(client)return client;const cfg=window.JOCAD_CONFIG;if(!window.supabase||!cfg?.url||!cfg?.anonKey)return null;client=window.supabase.createClient(cfg.url,cfg.anonKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{headers:{'X-Client-Info':'jocad-public-v27'}}});return client;}
 function status(message,error=false){const el=$('#jocadSyncStatus');if(el){el.textContent=message;el.dataset.error=String(error);}const note=$('.sync-note');if(note)note.title=message;}
 async function sync(){if(refreshing||document.hidden)return;const c=getClient();if(!c)return;refreshing=true;try{
+window.jocadLoadOfficialPublic?.(c);
 let [m,b,med,awards]=await Promise.all([c.from('matches').select('id,num,day,home,away,sport,gender,score_a,score_b,status,result_details,winner_side,finished_at'),c.from('bulletins').select('id,title,body,published_at').order('published_at',{ascending:false}),c.from('medals').select('course,gold,silver'),c.from('medal_awards').select('id,course,category,activity,gender,medal_type,placement,match_id,description,awarded_at,status,created_by,updated_at').order('awarded_at',{ascending:false})]);
 if(m.error && ['42703','PGRST204'].includes(m.error.code)){m=await c.from('matches').select('id,num,day,home,away,sport,gender,score_a,score_b,status,result_details,winner_side');}
 if(m.error)throw m.error;if(b.error)throw b.error;

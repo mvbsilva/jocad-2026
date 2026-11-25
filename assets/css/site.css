@@ -200,3 +200,6 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
 @media(max-width:600px){#news{padding:12px}#news .bulletin-public{padding:11px}}
 /* V40 */
 #medalhas .medal-table-wrap{overflow-x:auto;min-width:0}#medalhas .medal-table th,#medalhas .medal-table td{padding:6px 4px;white-space:nowrap}#medalhas .medal-table td:nth-child(2){white-space:normal}#medalhas .medal-table td:last-child{color:#145c38;font-weight:700}#medalhas .podium-item strong{overflow-wrap:anywhere}#medalhas .award-card p{white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* V42: boletins oficiais */
+.official-list{display:grid;gap:10px;margin:12px 0 22px;overflow-wrap:anywhere}.official-link{display:inline-flex;align-items:center;border:1px solid #c9ddd0;border-radius:8px;padding:8px 12px;color:#145c38;font-size:13px;font-weight:600;text-decoration:none}.official-link[download]{background:#145c38;color:white}.official-link:focus-visible{outline:2px solid #145c38;outline-offset:2px}#officialFeedback{font-size:13px;margin:10px 0}#officialRefresh{margin-top:8px;align-self:flex-start}

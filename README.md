@@ -67,3 +67,6 @@ Classificação geral por pontos. Consulte [instruções de publicação](docs/C
 
 ## V41
 Inclusão de Gestão Ambiental. Em produção, executar apenas 0013 e publicar index.html; 0012 documenta a correção de colocações compartilhadas já aplicada.
+
+### V42 — Boletins oficiais em PDF
+Execute somente `database/migrations/0014-boletins-oficiais.sql` uma vez no Supabase de produção. Publique os arquivos alterados e preserve `config.js`. PDFs ficam em `boletins/`; o módulo administrativo lista arquivos pela API pública do GitHub (repositório público, sujeito a limites). Selecione o PDF, título e data e publique. Substitua o arquivo com o mesmo nome para atualizar após deploy. Despublicar oculta a listagem, mas não torna o PDF privado. A data é editorial, não agenda publicação futura. Nenhum boletim é publicado automaticamente. Não execute scripts de reset nem migrações anteriores.
