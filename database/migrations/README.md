@@ -22,3 +22,6 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 - `0010-acompanhamento-ao-vivo.sql`: metadados de finalização e trigger (V37).
 
 - `0011-classificacao-geral.sql`: colocações de 1º a 5º, eixo artístico e medalha opcional (V40).
+
+- `0012-colocacoes-compartilhadas.sql`: consolida os índices já corrigidos em produção.
+- `0013-gestao-ambiental.sql`: cadastra Gestão Ambiental sem alterar saldos existentes.

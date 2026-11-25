@@ -64,3 +64,6 @@ Consulte `docs/INSTALACAO.md`, `docs/OPERACAO.md`, `docs/ARQUITETURA.md` e `docs
 
 ## V40
 Classificação geral por pontos. Consulte [instruções de publicação](docs/CLASSIFICACAO_V40.md).
+
+## V41
+Inclusão de Gestão Ambiental. Em produção, executar apenas 0013 e publicar index.html; 0012 documenta a correção de colocações compartilhadas já aplicada.
