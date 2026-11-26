@@ -15,7 +15,7 @@ $('authCancel')?.addEventListener('click',()=>$('authBox').classList.remove('sho
 $('logoutBtn')?.addEventListener('click',async()=>{if(client)await client.auth.signOut();session=null;role=null;await refresh();window.closeAdmin();});
 if(ready()){client.auth.onAuthStateChange(()=>{setTimeout(refresh,0)});await refresh();}
 });
-window.jocadSaveRemote=async function(g){if(!ready())throw Error('Supabase não configurado');await refresh();if(!session)throw Error('Sessão expirada. Faça login novamente.');const payload={score_a:g.scoreA===''?null:Number(g.scoreA),score_b:g.scoreB===''?null:Number(g.scoreB),status:g.status,result_details:g.result_details||{},winner_side:g.winner_side||null};const {error}=await client.from('matches').update(payload).eq('id',g.id);if(error)throw error;};
+window.jocadSaveRemote=async function(g,auto=false,expected=null){if(!ready())throw Error('Supabase não configurado');await refresh();if(!session)throw Error('Sessão expirada. Faça login novamente.');const payload={score_a:g.scoreA===''?null:Number(g.scoreA),score_b:g.scoreB===''?null:Number(g.scoreB),status:g.status,result_details:g.result_details||{},winner_side:g.winner_side||null};let q=client.from('matches').update(payload).eq('id',g.id);if(auto){if(!expected||expected.status!=='Em andamento')throw Error('Salve primeiro a situação Em andamento no modo manual.');q=q.eq('status','Em andamento').eq('result_details',JSON.stringify(expected.result_details||{}));for(const [key,value] of [['score_a',expected.scoreA],['score_b',expected.scoreB]])q=value===''?q.is(key,null):q.eq(key,Number(value));}const {data,error}=await q.select('id');if(error)throw error;if(!data?.length)throw Error('Nenhum jogo atualizado. Confira as permissões.');};
 })();
 
 /* Componente: sumulas-v13.js */
@@ -77,12 +77,13 @@ window.jocadCollectRules=function(g){
  g.result_details={...(g.result_details||{}),periods,penalties,tiebreak:$('jocadTiebreak')?.value.trim()||'',kind:k};
 };
 window.jocadDetailHtml=function(g,featured=false){
+ if(g.status==='Programado')return '';
  const d=g.result_details||{},p=Array.isArray(d.periods)?d.periods:[],k=d.kind||kind(g),final=isFinal(g);
  const valid=p.map((x,i)=>({x,i})).filter(({x})=>x&&x.a!==null&&x.a!==undefined&&x.a!==''&&x.b!==null&&x.b!==undefined&&x.b!=='');
  const note=String(d.tiebreak||'').trim();const penalties=d.penalties;
- if(!valid.length&&!note&&!penalties)return '';
+ if(!valid.length&&!note&&(!penalties||penaltyScore(g)))return '';
  const stage=i=>k==='volley'?(final&&i===4?'Tie-break (5º set)':!final&&i===2?'Desempate (3º set)':`${i+1}º set`):k==='dodge'?'8 minutos':`${i+1}º tempo`;
- const penaltyHtml=penalties&&penalties.a!==null&&penalties.b!==null?`<div class="jocad-tiebreak">Pênaltis: <b>${esc(penalties.a)} × ${esc(penalties.b)}</b></div>`:'';
+ const penaltyHtml=!penaltyScore(g)&&penalties&&penalties.a!==null&&penalties.b!==null?`<div class="jocad-tiebreak">Pênaltis: <b>${esc(penalties.a)} × ${esc(penalties.b)}</b></div>`:'';
  return `<div class="jocad-public-detail ${featured?'is-featured':''}"><div class="jocad-stage-title">${featured?'Detalhes da partida':'Parciais por etapa'}</div><div class="jocad-stage-list">${valid.map(({x,i})=>`<span class="jocad-stage"><span>${esc(stage(i))}:</span><b>${esc(x.a)} × ${esc(x.b)}</b></span>`).join('')}</div>${penaltyHtml}${note?`<div class="jocad-tiebreak">Observação: ${esc(note)}</div>`:''}</div>`;
 };
 })();
