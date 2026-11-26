@@ -25,3 +25,5 @@ Ordem histórica de execução sobre o **esquema inicial existente**:
 
 - `0012-colocacoes-compartilhadas.sql`: consolida os índices já corrigidos em produção.
 - `0013-gestao-ambiental.sql`: cadastra Gestão Ambiental sem alterar saldos existentes.
+
+- `0016-tabela-atualizada-v48.sql`: atualização da tabela oficial; executar isoladamente após backup.
