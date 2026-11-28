@@ -223,3 +223,11 @@ html,body,button,input,select,option,optgroup,textarea{font-family:Inter,ui-sans
 .point-control > button{border:0;background:#f1f7f3;color:#145c38;font-size:17px;font-weight:700;padding:0;min-width:0;cursor:pointer;}
 .point-control > button:focus-visible,.point-control > input:focus-visible{outline:2px solid #145c38;outline-offset:-2px;}
 @media(max-width:480px){.point-control{grid-template-columns:24px minmax(0,1fr) 24px;}.point-control > button{font-size:15px;}.matchup > .penalty-score{font-size:10px;}}
+
+/* V50 — resultados das finais e acesso administrativo sem sobreposição */
+.final-awards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.final-award{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;padding:12px 8px;border-radius:10px;overflow-wrap:anywhere;min-width:0;font-size:13px;font-weight:750}
+.final-award-icon{font-size:25px;line-height:1.2}.final-award>strong{font-size:10px;letter-spacing:.04em}.final-gold{background:#fcf5df;color:#785b16;border:1px solid #ead69a}.final-silver{background:#eef0f3;color:#485465;border:1px solid #d5dbe2}
+.final-official-score{text-align:center;display:grid;gap:5px;margin-top:12px;font-size:12px;overflow-wrap:anywhere}.final-official-score b{font-size:20px;color:#183c2d;white-space:nowrap}.final-official-score small{color:#59695e}.final-official-score .final-done{color:#176747;font-weight:700}.final-official-score .penalty-score{align-items:center;margin:auto}
+.footer-admin{min-width:0;max-width:100%}.footer-admin #sessionName{min-width:0;overflow-wrap:anywhere;flex:1 1 150px}.footer-admin #logoutBtn{margin-left:0;flex:none;min-height:36px}.footer-admin .admin-footer-link{background:#e8f2ea;color:#183c2d;border-radius:8px;padding:10px 14px;min-height:44px;text-decoration:none;font-size:13px;font-weight:700}.footer-admin .admin-footer-link:hover,.footer-admin .admin-footer-link:focus-visible{background:#fff;color:#183c2d}
+@media(max-width:700px){.footer-admin{align-items:stretch}.footer-admin .admin-footer-link{width:100%;text-align:center}.final-award{padding:10px 5px}}
